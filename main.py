@@ -1,4 +1,4 @@
-import kivy  #test branch merge
+import kivy
 kivy.require('1.9.1') # replace with your current kivy version !
 from kivy.network.urlrequest import UrlRequest
 import json
