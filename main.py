@@ -11,6 +11,7 @@ from kivy.factory import Factory
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.modalview import ModalView
 from kivy.clock import Clock
+
 API_KEY="4ed6a7fcea9d4f73e046fdac47242b16"
 
 def locations_args_converter(index, data_item):
@@ -27,9 +28,12 @@ class AddLocationForm(ModalView):
     search_results = ObjectProperty()
 
     def search_location(self):
-        search_template = "http://api.openweathermap.org/data/2.5/find?q={}&type=like&APPID="+API_KEY
-        search_url = search_template.format(self.search_input.text)
-        request = UrlRequest(search_url, self.found_location)
+        if self.search_input.text is not '':
+            search_template = "http://api.openweathermap.org/data/2.5/find?q={}&type=like&APPID="+API_KEY
+            search_url = search_template.format(self.search_input.text)
+            request = UrlRequest(search_url, self.found_location)
+        else:
+            self.search_input.text = 'Split'
 
     def found_location(self, request, data):
         data = json.loads(data.decode()) if not isinstance(data, dict) else data
