@@ -1,2 +1,3 @@
 # kivy-weather
-multi platform app written in python, kivy based on Crating apps in kivy book 
+multiplatform weather app written in kivy 1.9.1
+based on Crating apps in kivy book.
