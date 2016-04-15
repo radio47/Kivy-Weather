@@ -17,6 +17,9 @@ WeatherRoot:
         TextInput:
             id: search_box
             size_hint_x: 50
+            focus: True
+            multiline: False
+            on_text_validate: root.search_location()
         Button:
             text: "Search"
             size_hint_x: 25
@@ -28,6 +31,11 @@ WeatherRoot:
         id: search_results_list
         adapter:
             ListAdapter(data=[], cls=main.LocationButton)
+    Button:
+      height: "40dp"
+      size_hint_y: None
+      text: "Cancel"
+      on_press: app.root.show_current_weather(None)
 
 <CurrentWeather@BoxLayout>:
     location: "" # <1>

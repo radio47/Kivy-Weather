@@ -15,6 +15,7 @@ class LocationButton(ListItemButton):
 class AddLocationForm(BoxLayout):
     search_input = ObjectProperty()
     search_results = ObjectProperty()
+    current_weather = ObjectProperty()
 
     def search_location(self):
         search_template = "http://api.openweathermap.org/data/2.5/find?q={}&type=like&APPID="+API_KEY
@@ -30,10 +31,13 @@ class AddLocationForm(BoxLayout):
         self.search_results._trigger_reset_populate()
 
 class WeatherRoot(BoxLayout):
-    def show_current_weather(self, location):
+    def show_current_weather(self, location = None):
         self.clear_widgets()
-        current_weather = Factory.CurrentWeather()
-        current_weather.location = location
+        if location is None and self.current_weather is None:
+            location = "New York (US)"
+        if location is not None:
+            self.current_weather = Factory.CurrentWeather()
+            self.current_weatherr.location = location
         self.add_widget(current_weather)
 
 class WeatherApp(App):
